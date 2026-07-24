@@ -16,182 +16,276 @@
 
 # Phase 2 - QUICK ASSESS
 
-## Quick Problem Card 1
+# QUICK PROBLEM CARD #1
 
-### Tên bài toán
+### Bài toán (1 câu)
 
-**AI Medical Record Assistant**
+AI hỗ trợ bác sĩ tự động đọc, tóm tắt và phân tích hồ sơ bệnh án nhằm giảm thời gian chuẩn bị trước khi khám bệnh.
 
-**Công ty:** Vinmec
+### Công ty thành viên
 
-### Actor (Người gặp khó khăn)
+- [ ] VinFast
+- [ ] Xanh SM
+- [ ] Vinhomes
+- [x] Vinmec
+- [ ] Khác: _______________________
 
-Bác sĩ khám bệnh
+---
 
-### Quy trình thủ công hiện tại
+### Ai đang đau (Actor)?
 
-```text
-Bệnh nhân đến khám
-        ↓
-Mở hồ sơ bệnh án
-        ↓
-Đọc tiền sử bệnh
-        ↓
-Đọc kết quả xét nghiệm
-        ↓
-Đọc đơn thuốc cũ
-        ↓
-Tự tóm tắt thông tin
-        ↓
-Bắt đầu khám
-```
+**Bác sĩ khám bệnh (Internal User)**
 
-### Bottleneck
+Đối với các bệnh nhân tái khám hoặc có bệnh nền, hồ sơ bệnh án thường rất dài (20–100 trang), bao gồm:
 
-- Đọc hồ sơ bệnh án mất khoảng **8–15 phút/bệnh nhân**.
-- Hồ sơ có thể dài từ **20–100 trang**.
-- Dễ bỏ sót các thông tin quan trọng như dị ứng thuốc, bệnh nền hoặc kết quả xét nghiệm bất thường.
+- Tiền sử bệnh
+- Kết quả xét nghiệm
+- Đơn thuốc
+- Chẩn đoán cũ
+- Kết quả chẩn đoán hình ảnh
+- Ghi chú của nhiều bác sĩ
 
-### AI tham gia
+Trước khi bắt đầu khám, bác sĩ phải tự đọc toàn bộ hồ sơ để nắm được tình trạng bệnh nhân.
+
+Đây là công việc lặp đi lặp lại, tiêu tốn nhiều thời gian nhưng không tạo ra giá trị chuyên môn.
+
+---
+
+### Workflow thủ công hiện tại (3–5 bước)
+
+1. Bác sĩ mở hồ sơ bệnh án trên hệ thống HIS/EMR
+      ↓
+2. Đọc tiền sử bệnh, kết quả xét nghiệm và đơn thuốc cũ
+      ↓
+3. Tự ghi nhớ và tổng hợp các thông tin quan trọng
+      ↓
+4. Bắt đầu khám và hỏi bệnh nhân
+
+---
+
+### Bước nào tốn thời gian/lỗi nhất?
+
+**Bước 2: Đọc và tổng hợp hồ sơ bệnh án**
+
+⏱ **8–15 phút/lượt khám**
+
+Các vấn đề gặp phải:
+
+- Hồ sơ rất dài.
+- Có nhiều dữ liệu không liên quan.
+- Dễ bỏ sót dị ứng thuốc.
+- Dễ bỏ sót bệnh nền.
+- Dễ quên các chỉ số xét nghiệm bất thường.
+- Áp lực khi số lượng bệnh nhân đông.
+
+---
+
+### AI có thể nhảy vào hỗ trợ ở bước nào?
+
+AI tham gia ngay sau khi bác sĩ mở hồ sơ.
+
+AI sẽ:
 
 - Đọc toàn bộ hồ sơ bệnh án.
-- Tự động tóm tắt các thông tin quan trọng.
+- Tóm tắt trong khoảng 5–10 dòng.
+- Liệt kê bệnh nền.
+- Liệt kê thuốc đang sử dụng.
 - Highlight các chỉ số bất thường.
-- Trả lời câu hỏi của bác sĩ dựa trên dữ liệu bệnh án.
+- So sánh với lần khám gần nhất.
+- Trả lời câu hỏi của bác sĩ như:
+  - "Lần gần nhất HbA1c là bao nhiêu?"
+  - "Bệnh nhân có tiền sử dị ứng thuốc không?"
+  - "Creatinine có tăng so với lần trước không?"
 
-### Success Metrics
-
-- Giảm thời gian đọc hồ sơ từ **10 phút xuống dưới 2 phút**.
-- Độ chính xác của bản tóm tắt đạt **≥95%**.
-- Giảm **80%** thời gian tìm kiếm thông tin trong hồ sơ.
-
-### Đề xuất kiến trúc
-
-**LLM + RAG**
+Bác sĩ chỉ cần kiểm tra kết quả trước khi khám.
 
 ---
 
-## Quick Problem Card 2
+### Đo thành công bằng gì (Metric có số)?
 
-### Tên bài toán
-
-**AI Clinical Documentation Assistant**
-
-**Công ty:** Vinmec
-
-### Actor
-
-Điều dưỡng
-
-### Quy trình thủ công hiện tại
-
-```text
-Khám bệnh
-    ↓
-Ghi chú giấy
-    ↓
-Nhập vào HIS/EMR
-    ↓
-Kiểm tra lại
-    ↓
-Lưu hồ sơ
-```
-
-### Bottleneck
-
-- Nhập liệu mất khoảng **5–8 phút/bệnh nhân**.
-- Dễ xảy ra lỗi nhập liệu hoặc thiếu thông tin.
-- Khối lượng công việc lớn vào giờ cao điểm.
-
-### AI tham gia
-
-- Chuyển giọng nói thành văn bản (Speech-to-Text).
-- Tự động tạo bệnh án theo mẫu.
-- Điều dưỡng chỉ cần kiểm tra và xác nhận.
-
-### Success Metrics
-
-- Giảm thời gian nhập liệu từ **7 phút xuống dưới 2 phút**.
-- Giảm lỗi nhập liệu **≥70%**.
-- Tăng năng suất xử lý hồ sơ **≥40%**.
-
-### Đề xuất kiến trúc
-
-**Speech-to-Text + LLM**
+| Metric | Hiện tại | Mục tiêu |
+|---------|-----------|-----------|
+| Thời gian đọc hồ sơ | 10 phút | < 2 phút |
+| Thời gian tìm kết quả xét nghiệm | 3 phút | < 30 giây |
+| Độ chính xác bản tóm tắt | - | ≥95% |
+| Tỷ lệ bỏ sót thông tin quan trọng | ~10% | <2% |
+| Mức hài lòng của bác sĩ | - | >90% |
 
 ---
 
-## Quick Problem Card 3
+### Quick Architecture
 
-### Tên bài toán
+- [ ] No AI
+- [ ] Rule
+- [x] LLM
+- [ ] Agent
 
-**Medical Guideline Assistant**
+Lý do:
 
-**Công ty:** Vinmec
+Bài toán yêu cầu AI hiểu ngữ cảnh, đọc tài liệu dài, tổng hợp thông tin và trả lời bằng ngôn ngữ tự nhiên. Đây là thế mạnh của LLM kết hợp RAG.
 
-### Actor
+# QUICK PROBLEM CARD #2
 
-Bác sĩ
+### Bài toán (1 câu)
 
-### Quy trình thủ công hiện tại
+AI tự động tạo bệnh án điện tử từ cuộc hội thoại giữa bác sĩ và bệnh nhân.
 
-```text
-Có ca bệnh
+### Công ty thành viên
+
+- [ ] VinFast
+- [ ] Xanh SM
+- [ ] Vinhomes
+- [x] Vinmec
+- [ ] Khác: _______________________
+
+---
+
+### Ai đang đau (Actor)?
+
+Điều dưỡng và bác sĩ.
+
+Sau khi khám xong, bác sĩ hoặc điều dưỡng phải nhập lại toàn bộ thông tin khám vào hệ thống HIS.
+
+Việc nhập liệu vừa mất thời gian vừa dễ sai sót.
+
+---
+
+### Workflow thủ công hiện tại
+
+1. Khám bệnh
       ↓
-Google tài liệu
+2. Ghi chú nhanh bằng giấy hoặc máy tính
       ↓
-Tìm guideline
+3. Nhập lại vào HIS
       ↓
-Đọc file PDF
+4. Kiểm tra lỗi
       ↓
-Đối chiếu với bệnh án
+5. Lưu hồ sơ
+
+---
+
+### Bước nào tốn thời gian/lỗi nhất?
+
+Bước 3 - Nhập bệnh án
+
+⏱ 5–8 phút/lượt
+
+Lỗi thường gặp:
+
+- Sai chính tả
+- Thiếu thông tin
+- Nhập nhầm thuốc
+- Quên nhập kết quả khám
+
+---
+
+### AI có thể nhảy vào hỗ trợ ở bước nào?
+
+Sau khi bác sĩ khám.
+
+AI sẽ:
+
+- Speech-to-Text
+- Chuẩn hóa thuật ngữ y khoa
+- Sinh bệnh án theo mẫu chuẩn
+- Điều dưỡng chỉ cần xác nhận trước khi lưu.
+
+---
+
+### Đo thành công bằng gì?
+
+- Giảm thời gian nhập liệu từ **7 phút → dưới 2 phút**
+- Giảm lỗi nhập liệu **70%**
+- Tăng số bệnh nhân xử lý mỗi ca **30%**
+
+---
+
+### Quick Architecture
+
+- [ ] No AI
+- [ ] Rule
+- [x] LLM
+- [ ] Agent
+
+# QUICK PROBLEM CARD #3
+
+### Bài toán (1 câu)
+
+AI Agent hỗ trợ bác sĩ tìm kiếm và đối chiếu hướng dẫn điều trị (Clinical Guideline) phù hợp với từng bệnh nhân.
+
+### Công ty thành viên
+
+- [ ] VinFast
+- [ ] Xanh SM
+- [ ] Vinhomes
+- [x] Vinmec
+- [ ] Khác: _______________________
+
+---
+
+### Ai đang đau (Actor)?
+
+Bác sĩ chuyên khoa.
+
+Đối với các ca bệnh phức tạp, bác sĩ cần tra cứu guideline từ WHO, Bộ Y tế, ESC, ACC... trước khi đưa ra quyết định.
+
+Việc tìm kiếm và đọc tài liệu rất mất thời gian.
+
+---
+
+### Workflow thủ công hiện tại
+
+1. Xem hồ sơ bệnh nhân
       ↓
-Ra quyết định
-```
+2. Google guideline
+      ↓
+3. Đọc PDF
+      ↓
+4. So sánh với bệnh nhân
+      ↓
+5. Ra quyết định
 
-### Bottleneck
+---
 
-- Mỗi lần tra cứu mất khoảng **10–20 phút**.
-- Có nhiều nguồn tài liệu khác nhau (WHO, Bộ Y tế, ESC, ACC...).
-- Dễ sử dụng tài liệu cũ hoặc bỏ sót hướng dẫn mới.
+### Bước nào tốn thời gian/lỗi nhất?
 
-### AI tham gia
+Bước 2 và bước 3
 
-- Tự động tìm guideline phù hợp.
-- Đọc và tóm tắt tài liệu.
+⏱ 10–20 phút/lần
+
+Khó khăn:
+
+- Có nhiều phiên bản guideline.
+- Tài liệu dài hàng trăm trang.
+- Dễ sử dụng tài liệu cũ.
+
+---
+
+### AI có thể nhảy vào hỗ trợ ở bước nào?
+
+Sau khi bác sĩ chọn bệnh nhân.
+
+AI Agent sẽ:
+
+- Tự tìm guideline mới nhất.
+- Đọc tài liệu.
 - Trích dẫn nguồn.
 - So sánh với hồ sơ bệnh nhân.
-
-### Success Metrics
-
-- Giảm thời gian tra cứu từ **15 phút xuống dưới 1 phút**.
-- **100%** câu trả lời có nguồn trích dẫn.
-- Tỷ lệ tìm đúng tài liệu **≥95%**.
-
-### Đề xuất kiến trúc
-
-**Agent + RAG + Search**
+- Sinh báo cáo tóm tắt để bác sĩ tham khảo.
 
 ---
 
-# Thống kê tổn thất ước tính
+### Đo thành công bằng gì?
 
-| Pain Point | Thời gian hiện tại | Sau AI | Tổn thất ước tính |
-|------------|-------------------|---------|-------------------|
-| Đọc hồ sơ bệnh án | 8–15 phút/hồ sơ | <2 phút | Với 200 hồ sơ/ngày có thể tiết kiệm khoảng **20–43 giờ làm việc/ngày**. |
-| Nhập liệu bệnh án | 5–8 phút/hồ sơ | <2 phút | Với 300 hồ sơ/ngày có thể tiết kiệm khoảng **15–30 giờ làm việc/ngày**. |
-| Tra cứu guideline | 10–20 phút/lần | <1 phút | Nếu có 50 lượt tra cứu/ngày có thể tiết kiệm khoảng **7,5–16 giờ/ngày**. |
-| Trả lời câu hỏi lặp lại của bệnh nhân | 3–5 phút/lượt | <30 giây | Giảm **60–80%** khối lượng công việc của tổng đài. |
-| Tổng hợp kết quả xét nghiệm | 5–10 phút/ca | <1 phút | Giảm đáng kể thời gian chuẩn bị trước khi bác sĩ khám. |
+- Giảm thời gian tra cứu từ **15 phút → dưới 1 phút**
+- **100%** câu trả lời có nguồn trích dẫn
+- Độ chính xác tìm tài liệu **≥95%**
 
 ---
 
-# Đề xuất bài toán ưu tiên
+### Quick Architecture
 
-Bài toán phù hợp nhất để phát triển trong các giai đoạn tiếp theo là **AI Medical Record Assistant** vì:
-
-- Giải quyết đúng pain point lớn của bác sĩ.
-- Có thể áp dụng **LLM + RAG** hiệu quả.
-- Có metric đánh giá rõ ràng.
-- Dễ thiết kế Operational Boundary, Human-in-the-loop và Prompt Defense.
-- Phù hợp để phát triển thành AI Agent trong môi trường doanh nghiệp.
+- [ ] No AI
+- [ ] Rule
+- [ ] LLM
+- [x] Agent
