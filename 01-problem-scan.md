@@ -33,78 +33,83 @@ Chọn 3 bài toán tiềm năng nhất từ danh sách scan:
 
 ---
 
-### QUICK PROBLEM CARD #1
+```text
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #1                                                        │
+│                                                                              │
+│ Bài toán (1 câu): Tài xế Xanh SM báo pin rất thấp khi đang vận hành,         │
+│ điều phối viên mất nhiều thời gian để xác định phương án sạc an toàn.        │
+│ Công ty thành viên: [ ] VinFast  [x] Xanh SM  [ ] Vinhomes                   │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)                           │
+│                                                                              │
+│ Ai đang đau (Actor)? Tài xế, điều phối viên và khách đang chờ chuyến.        │
+│                                                                              │
+│ Workflow thủ công hiện tại (3-5 bước):                                       │
+│   1. Tài xế báo pin/vị trí --> 2. Điều phối viên kiểm tra bản đồ             │
+│   3. Tra cứu trạm sạc      --> 4. Chọn phương án xử lý                       │
+│   5. Soạn hướng dẫn hoặc liên hệ đội xe sạc/cứu hộ                           │
+│                                                                              │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 3-4 (10-15 phút/lượt)                  │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 3-5                               │
+│                                                                              │
+│ Đo thành công bằng gì (Metric có số)?                                        │
+│   Giảm thời gian xử lý từ 15 phút xuống dưới 3 phút/lượt;                    │
+│   95% ca pin dưới 5% không bị gợi ý trạm xa hơn 5 km.                        │
+│                                                                              │
+│ Quick Architecture: [ ] No AI  [x] Rule  [x] LLM  [ ] Agent                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
 
-**Bài toán (1 câu):** Tài xế Xanh SM báo pin rất thấp khi đang vận hành, còn điều phối viên mất nhiều thời gian để xác định phương án sạc an toàn.
+```text
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #2                                                        │
+│                                                                              │
+│ Bài toán (1 câu): Phản ánh cư dân trên ứng dụng Vinhomes Resident bị         │
+│ phân loại chậm hoặc chuyển sai bộ phận, làm tăng thời gian xử lý.            │
+│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [x] Vinhomes                   │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)                           │
+│                                                                              │
+│ Ai đang đau (Actor)? Cư dân, CSKH và các đội vận hành tòa nhà.               │
+│                                                                              │
+│ Workflow thủ công hiện tại (3-5 bước):                                       │
+│   1. Cư dân gửi phản ánh   --> 2. CSKH đọc và phân loại                      │
+│   3. Gán ticket cho bộ phận --> 4. Yêu cầu bổ sung thông tin                 │
+│   5. Cập nhật trạng thái và phản hồi cho cư dân                              │
+│                                                                              │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2-3 (6-10 phút/ticket)                 │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2-4                               │
+│                                                                              │
+│ Đo thành công bằng gì (Metric có số)?                                        │
+│   85% ticket được phân loại đúng trong dưới 10 giây;                         │
+│   giảm tỷ lệ chuyển sai bộ phận từ 18% xuống dưới 5%.                        │
+│                                                                              │
+│ Quick Architecture: [ ] No AI  [x] Rule  [x] LLM  [ ] Agent                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
 
-**Công ty thành viên:** [ ] VinFast &nbsp; [x] Xanh SM &nbsp; [ ] Vinhomes &nbsp; [ ] Vinmec &nbsp; [ ] Khác
-
-**Ai đang đau (Actor)?** Tài xế Xanh SM, điều phối viên tổng đài và khách hàng đang chờ chuyến.
-
-**Workflow thủ công hiện tại (3-5 bước):**
-
-1. Tài xế gọi hoặc nhắn tin cho tổng đài, cung cấp mức pin, vị trí và tình trạng chuyến.
-2. Điều phối viên mở bản đồ nội bộ để kiểm tra tọa độ xe.
-3. Điều phối viên tra cứu trạm sạc gần đó và tình trạng trụ sạc.
-4. Điều phối viên ước lượng khoảng cách, mức pin còn lại và chọn phương án.
-5. Điều phối viên soạn hướng dẫn cho tài xế hoặc liên hệ đội xe sạc/cứu hộ.
-
-**Bước nào tốn thời gian/lỗi nhất?** Bước 3-4 (**10-15 phút/lượt**); dễ sai khi dữ liệu trạm sạc thay đổi nhanh.
-
-**AI có thể nhảy vào hỗ trợ ở bước nào?** Bước 3-5: đọc thông tin tài xế, tóm tắt tình huống, gợi ý phương án và tạo bản nháp để điều phối viên kiểm tra.
-
-**Đo thành công bằng gì (Metric có số)?** Giảm thời gian xử lý từ 15 phút xuống dưới 3 phút/lượt; 95% trường hợp pin dưới 5% không bị gợi ý trạm sạc xa hơn 5 km.
-
-**Quick Architecture:** [ ] No AI &nbsp; [x] Rule &nbsp; [x] LLM &nbsp; [ ] Agent
-
----
-
-### QUICK PROBLEM CARD #2
-
-**Bài toán (1 câu):** Phản ánh của cư dân trên ứng dụng Vinhomes Resident bị phân loại chậm hoặc chuyển sai bộ phận, làm tăng thời gian xử lý khiếu nại.
-
-**Công ty thành viên:** [ ] VinFast &nbsp; [ ] Xanh SM &nbsp; [x] Vinhomes &nbsp; [ ] Vinmec &nbsp; [ ] Khác
-
-**Ai đang đau (Actor)?** Cư dân, nhân viên ban quản lý tòa nhà và các đội vận hành như kỹ thuật, vệ sinh, an ninh.
-
-**Workflow thủ công hiện tại (3-5 bước):**
-
-1. Cư dân gửi phản ánh trên ứng dụng kèm mô tả và hình ảnh.
-2. Nhân viên CSKH đọc nội dung và xác định loại sự cố.
-3. Nhân viên gán ticket cho bộ phận phụ trách.
-4. Bộ phận nhận ticket yêu cầu bổ sung nếu thiếu thông tin.
-5. CSKH cập nhật trạng thái và phản hồi cho cư dân.
-
-**Bước nào tốn thời gian/lỗi nhất?** Bước 2-3 (**6-10 phút/ticket**); phân loại sai khiến ticket bị chuyển qua lại giữa các bộ phận.
-
-**AI có thể nhảy vào hỗ trợ ở bước nào?** Bước 2-4: phân loại ticket, trích xuất vị trí, xác định mức ưu tiên và tạo câu hỏi bổ sung khi thiếu thông tin.
-
-**Đo thành công bằng gì (Metric có số)?** 85% ticket được phân loại đúng trong dưới 10 giây; giảm tỷ lệ chuyển sai bộ phận từ 18% xuống dưới 5%.
-
-**Quick Architecture:** [ ] No AI &nbsp; [x] Rule &nbsp; [x] LLM &nbsp; [ ] Agent
-
----
-
-### QUICK PROBLEM CARD #3
-
-**Bài toán (1 câu):** Khách hàng VinFast mô tả triệu chứng xe bằng tiếng Việt đời thường, khiến CSKH mất thời gian hỏi lại và phân loại nhóm lỗi ban đầu.
-
-**Công ty thành viên:** [x] VinFast &nbsp; [ ] Xanh SM &nbsp; [ ] Vinhomes &nbsp; [ ] Vinmec &nbsp; [ ] Khác
-
-**Ai đang đau (Actor)?** Khách hàng, nhân viên CSKH, cố vấn dịch vụ và kỹ thuật viên tại xưởng.
-
-**Workflow thủ công hiện tại (3-5 bước):**
-
-1. Khách hàng gọi hoặc nhắn tin mô tả triệu chứng xe.
-2. CSKH hỏi lại thông tin xe, thời điểm xảy ra lỗi và mức độ nguy hiểm.
-3. CSKH tự gán nhóm lỗi ban đầu theo kinh nghiệm.
-4. Ticket được chuyển sang cố vấn dịch vụ hoặc kỹ thuật viên.
-5. Cố vấn dịch vụ liên hệ lại nếu ticket thiếu thông tin.
-
-**Bước nào tốn thời gian/lỗi nhất?** Bước 2-3 (**8-12 phút/ticket**); dễ sai khi khách hàng không sử dụng thuật ngữ kỹ thuật.
-
-**AI có thể nhảy vào hỗ trợ ở bước nào?** Bước 2-4: trích xuất triệu chứng, gợi ý nhóm lỗi, xác định mức ưu tiên và tạo danh sách câu hỏi cần bổ sung.
-
-**Đo thành công bằng gì (Metric có số)?** Giảm thời gian tạo ticket từ 12 phút xuống dưới 4 phút; 80% ticket có đủ thông tin tối thiểu trước khi chuyển cho cố vấn dịch vụ.
-
-**Quick Architecture:** [ ] No AI &nbsp; [x] Rule &nbsp; [x] LLM &nbsp; [ ] Agent
+```text
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #3                                                        │
+│                                                                              │
+│ Bài toán (1 câu): Khách hàng VinFast mô tả triệu chứng xe bằng tiếng         │
+│ Việt đời thường, khiến CSKH mất thời gian hỏi lại và phân loại lỗi.          │
+│ Công ty thành viên: [x] VinFast  [ ] Xanh SM  [ ] Vinhomes                   │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)                           │
+│                                                                              │
+│ Ai đang đau (Actor)? Khách hàng, CSKH, cố vấn dịch vụ, kỹ thuật viên.        │
+│                                                                              │
+│ Workflow thủ công hiện tại (3-5 bước):                                       │
+│   1. Khách mô tả triệu chứng --> 2. CSKH hỏi thông tin bổ sung               │
+│   3. Gán nhóm lỗi ban đầu     --> 4. Chuyển ticket cho kỹ thuật              │
+│   5. Liên hệ lại nếu ticket còn thiếu thông tin                              │
+│                                                                              │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2-3 (8-12 phút/ticket)                 │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2-4                               │
+│                                                                              │
+│ Đo thành công bằng gì (Metric có số)?                                        │
+│   Giảm thời gian tạo ticket từ 12 phút xuống dưới 4 phút;                    │
+│   80% ticket đủ thông tin trước khi chuyển cho cố vấn dịch vụ.               │
+│                                                                              │
+│ Quick Architecture: [ ] No AI  [x] Rule  [x] LLM  [ ] Agent                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
