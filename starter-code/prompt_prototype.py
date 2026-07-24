@@ -163,7 +163,10 @@ def verify_output(test: dict, output: str) -> list[tuple[str, bool]]:
 
 def main() -> int:
     if not (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
-        print("[ERROR] Chưa có GEMINI_API_KEY hoặc GOOGLE_API_KEY.")
+        print(
+            "[ERROR] Chưa có GEMINI_API_KEY hoặc GOOGLE_API_KEY.",
+            file=sys.stderr,
+        )
         return 1
 
     print("=" * 60)
@@ -186,7 +189,7 @@ def main() -> int:
                     print(f"[FAIL] {name} - Failed")
                     all_passed = False
         except Exception as exc:
-            print(f"[ERROR] API/test execution failed: {exc}")
+            print(f"[ERROR] API/test execution failed: {exc}", file=sys.stderr)
             all_passed = False
 
     print("\n" + "=" * 60)
