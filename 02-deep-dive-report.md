@@ -1,7 +1,21 @@
 # 02-deep-dive-report.md — Báo Cáo Deep-Dive
 ## Lab 02: AI Product Scoping | Vin Smart Future
 
-> **Thành viên:** Nguyễn Quốc Việt — 2A202601737  
+---
+
+## 🏛️ Thông tin Nhóm Dự án
+
+### Thành viên
+
+| Họ và tên | MSSV |
+|---|---|
+| Nguyễn Chí Hiếu | 2A202601931 |
+| Nguyễn Minh Phương | 2A202601947 |
+| Đỗ Duy Đông | 2A202601657 |
+| Lại Thế Rin | 2A202601665 |
+| Nguyễn Quốc Việt | 2A202601737 |
+| Nguyễn Việt Thắng | 2A202601321 |
+
 > **Bài toán được chọn:** Xanh SM — Xử lý sự cố hết pin thực địa cho taxi điện  
 > **Ngày:** 24/07/2026
 
