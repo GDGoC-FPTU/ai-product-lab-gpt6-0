@@ -85,7 +85,7 @@ jobs:
       with:
         test-name: Prototype Script
         setup-command: ''
-        command: python autograder/autograder.py --check-code-4
+        command: GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY }}" python autograder/autograder.py --check-code-4
         timeout: 60
         max-score: 10
     - name: Safety Verification
@@ -94,7 +94,7 @@ jobs:
       with:
         test-name: Safety Verification
         setup-command: ''
-        command: python autograder/autograder.py --check-code-5
+        command: GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY }}" python autograder/autograder.py --check-code-5
         timeout: 60
         max-score: 10
     - name: Autograding Reporter
