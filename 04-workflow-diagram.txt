@@ -1,0 +1,38 @@
+Current-State Workflow: Xanh SM Battery Emergency Handling
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│ BƯỚC 1       │     │ BƯỚC 2       │     │ BƯỚC 3       │     │ BƯỚC 4       │     │ BƯỚC 5       │
+│              │     │              │     │              │     │              │     │              │
+│ Nhan cuoc goi│     │ Tra cuu dinh │     │ Tra cuu tram │     │ Soan van ban │     │ Goi xe cuu   │
+│ su co tu     │ ──→ │ vi GPS cua  │ ──→ │ sac VinFast  │ ──→ │ huong dan    │ ──→ │ ho (neu pin  │
+│ tai xe       │     │ xe           │     │ con tru trong│     │ gui tai xe   │     │ duoi 5%)     │
+│              │     │              │     │              │     │              │     │              │
+│ 👤 Dispatch  │     │ 👤 Dispatch  │     │ 👤 Dispatch  │     │ 👤 Dispatch  │     │ 👤 Dispatch  │
+│ ⏱ 2 phut     │     │ ⏱ 2 phut     │     │ ⏱ 5 phut 🔴  │     │ ⏱ 5 phut 🔴  │     │ ⏱ 1 phut     │
+│              │     │              │     │              │     │              │     │              │
+│ In: Dien     │     │ In: Bien so  │     │ In: Toa do   │     │ In: Raw data │     │ In: % pin    │
+│ thoai        │     │ xe           │     │ GPS          │     │ tram sac     │     │              │
+│ Out: Log     │     │ Out: Toa do  │     │ Out: Dia chi │     │ Out: SMS     │     │ Out: Xe cuu  │
+│ su co        │     │ GPS          │     │ tram + tru   │     │ huong dan    │     │ ho dieu di   │
+└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+      🔄                    🔄                    🔄                   🔄                   🔄
+  Handoff:             Handoff:             Handoff:            Handoff:             Handoff:
+  Tai xe →             Dispatch tu          Dispatch mo         Dispatch tu          Dispatch goi
+  Dispatch             nhap bien so         Dashboard tram sac  soan tin nhan        doi cuu ho
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+LEGEND:
+  🔴 Bottleneck  — Step consuming most time or prone to errors
+  🔄 Handoff     — Information handoff point between humans/systems
+  👤 Actor       — Person performing that step
+  ⏱  Time        — Average processing time per step
+
+  Total Processing Time: 15 minutes per incident
+  Daily Volume: ~80 incidents/day (Hanoi region)
+  Total Daily Waste: 20 working hours
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Xanh SM Battery Emergency Dispatch — Current-State Workflow (As-Is)
+Lab 02: AI Product Scoping | Vin Smart Future | 24/07/2026
