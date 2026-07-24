@@ -14,7 +14,7 @@ import os
 import sys
 from typing import Any
 
-GEMINI_MODEL = "models/gemini-2.0-flash"
+GEMINI_MODEL = "models/gemini-2.0-flash-lite"
 
 SYSTEM_PROMPT = """
 You are the Xanh SM Emergency Dispatch Co-Pilot, an AI assistant for dispatchers at Vin Smart Future,
