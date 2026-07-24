@@ -1,0 +1,48 @@
+CURRENT-STATE WORKFLOW
+Xanh SM - Xử lý tình huống pin thấp (As-Is)
+
+┌──────────────────┐
+│ BƯỚC 1           │
+│ Tài xế báo pin,  │
+│ vị trí, chuyến   │
+│ Ước tính: 1-2'   │
+└────────┬─────────┘
+         │ Handoff: Tài xế -> Điều phối viên
+         v
+┌──────────────────┐
+│ BƯỚC 2           │
+│ Ghi nhận và tra  │
+│ cứu GPS của xe   │
+│ Ước tính: 1-2'   │
+└────────┬─────────┘
+         │ Handoff: Tổng đài -> Bản đồ
+         v
+┌──────────────────┐
+│ BƯỚC 3           │
+│ Tra cứu trạm,    │
+│ cổng, chỗ trống  │
+│ Ước tính: 3-5'   │
+│ [BOTTLENECK]     │
+└────────┬─────────┘
+         │ Handoff: Bản đồ -> Hệ thống trạm
+         v
+┌──────────────────┐
+│ BƯỚC 4           │
+│ So sánh phương   │
+│ án, soạn chỉ dẫn │
+│ Ước tính: 3-5'   │
+│ [BOTTLENECK]     │
+└────────┬─────────┘
+         │ Handoff: Điều phối -> Tài xế/đội hỗ trợ
+         v
+┌──────────────────┐
+│ BƯỚC 5           │
+│ Gửi hướng dẫn    │
+│ hoặc gọi hỗ trợ  │
+│ Ước tính: 1'     │
+└──────────────────┘
+
+Tổng thời gian giả định: 9-15 phút/lượt.
+
+Lưu ý: Đây là giả định scoping, chưa phải số liệu vận hành đã được
+Xanh SM xác nhận. Trước pilot cần đo median và P90 từ log thực tế.
