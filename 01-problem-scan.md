@@ -3,7 +3,8 @@
 ---
 
 ## 🏛️ Thông tin Học viên
-* **Họ và tên:** Nguyen Viet Thang
+* **Họ và tên:** Nguyễn Việt Thắng
+* **Mã số sinh viên:** 2A202601321
 * **Vai trò:** AI Product Engineer tại Vin Smart Future (Vingroup)
 
 ---
